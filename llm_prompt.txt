@@ -1,0 +1,65 @@
+# model: llama3.1:8b  temperature: 0.0  sent: yes
+
+=== SYSTEM ===
+You are a careful data analyst writing the insight section of an automated data-profile report.
+You are given VERIFIED FACTS that were computed by Python. You must follow these rules:
+1. Use ONLY the facts provided. Do not calculate, estimate, round differently or invent any number.
+   Every number you write must appear exactly in one of the facts you cite.
+2. Cite the fact IDs (e.g. "F03") that support each insight in the "fact_ids" list.
+3. Refer to columns by their exact names in backticks, e.g. `column name`.
+4. Do NOT guess the meaning, definition or units of any column, code or abbreviation that the facts do not explain.
+5. Do NOT claim that one variable causes, drives, leads to or is due to another. Correlation is not causation.
+6. Do not present speculation as fact. Use cautious words such as "may" or "suggests" for interpretations.
+7. Reply with JSON only, no text outside the JSON.
+
+=== USER ===
+Dataset: ev_population_data.csv (299,705 rows, 16 columns)
+
+VERIFIED FACTS (JSON lines: id, category, columns, statement):
+{"id": "F01", "category": "overview", "columns": [], "statement": "The file 'ev_population_data.csv' has 299,705 rows and 16 columns (1 numeric measure, 8 categorical attribute, 1 date-like field, 5 identifier-like field, 1 unknown or mixed type)."}
+{"id": "F02", "category": "data_quality", "columns": [], "statement": "There are 0 fully duplicated rows (0.0% of 299,705 rows)."}
+{"id": "F03", "category": "data_quality", "columns": ["Legislative District"], "statement": "`Legislative District` is missing for 790 of 299,705 rows (0.26%)."}
+{"id": "F04", "category": "data_quality", "columns": ["Electric Range"], "statement": "`Electric Range` is missing for 26 of 299,705 rows (0.01%)."}
+{"id": "F05", "category": "data_quality", "columns": ["Vehicle Location"], "statement": "`Vehicle Location` is missing for 20 of 299,705 rows (0.01%)."}
+{"id": "F06", "category": "data_quality", "columns": [], "statement": "825 rows (0.28%) have at least one missing value."}
+{"id": "F07", "category": "data_quality", "columns": ["City"], "statement": "`City` contains values that differ only by letter case or spacing: 'Mccleary' (75 rows) vs 'McCleary' (4 rows)."}
+{"id": "F08", "category": "data_quality", "columns": ["City"], "statement": "`City` contains values that differ only by letter case or spacing: 'McChord AFB' (2 rows) vs 'Mcchord Afb' (2 rows)."}
+{"id": "F09", "category": "data_quality", "columns": ["Electric Range"], "statement": "`Electric Range` is exactly 0 in 196,235 rows (65.48% of non-missing values); whether 0 is a real value or means 'not recorded' cannot be determined from the data."}
+{"id": "F10", "category": "data_quality", "columns": ["State"], "statement": "`State` is dominated by one value: 'WA' in 298,916 rows (99.74% of non-missing)."}
+{"id": "F11", "category": "data_quality", "columns": ["VIN (1-10)", "Postal Code", "Legislative District", "DOL Vehicle ID", "2020 GEOID"], "statement": "5 column(s) are identifier- or code-like and were excluded from arithmetic and correlation: `VIN (1-10)`, `Postal Code`, `Legislative District`, `DOL Vehicle ID`, `2020 GEOID`."}
+{"id": "F12", "category": "data_quality", "columns": ["VIN (1-10)", "Postal Code", "Vehicle Location", "2020 GEOID"], "statement": "4 column(s) may contain sensitive or location information (name/pattern heuristic): `VIN (1-10)`, `Postal Code`, `Vehicle Location`, `2020 GEOID`."}
+{"id": "F13", "category": "data_quality", "columns": ["Electric Utility"], "statement": "`Electric Utility`: some values contain list delimiters ('|' or ';')."}
+{"id": "F14", "category": "distribution", "columns": ["Electric Range"], "statement": "`Electric Range` ranges from 0 to 337; mean 36.66, median 0, standard deviation 76.03, Q1 0, Q3 32 (valid n = 299,679)."}
+{"id": "F15", "category": "distribution", "columns": ["Electric Range"], "statement": "`Electric Range` has skewness 2.2654 (strongly right-skewed); the 1.5×IQR rule flags 43,197 values (14.41%) as potential outliers outside [-48, 80]. They were flagged, not removed."}
+{"id": "F16", "category": "distribution", "columns": ["Electric Range"], "statement": "The most frequent value of `Electric Range` is 0, occurring in 196,235 rows (65.48%)."}
+{"id": "F17", "category": "categorical", "columns": ["County"], "statement": "`County` has 255 distinct values; the most common is 'King' with 144,257 rows (48.13% of non-missing). The second most common is 'Snohomish' (37,818 rows, 12.62%)."}
+{"id": "F18", "category": "categorical", "columns": ["City"], "statement": "`City` has 941 distinct values; the most common is 'Seattle' with 45,469 rows (15.17% of non-missing). The second most common is 'Bellevue' (14,386 rows, 4.8%)."}
+{"id": "F19", "category": "categorical", "columns": ["State"], "statement": "`State` has 50 distinct values; the most common is 'WA' with 298,916 rows (99.74% of non-missing). The second most common is 'CA' (180 rows, 0.06%)."}
+{"id": "F20", "category": "categorical", "columns": ["Make"], "statement": "`Make` has 51 distinct values; the most common is 'TESLA' with 122,981 rows (41.03% of non-missing). The second most common is 'CHEVROLET' (20,236 rows, 6.75%)."}
+{"id": "F21", "category": "categorical", "columns": ["Model"], "statement": "`Model` has 202 distinct values; the most common is 'MODEL Y' with 66,545 rows (22.2% of non-missing). The second most common is 'MODEL 3' (39,391 rows, 13.14%)."}
+{"id": "F22", "category": "categorical", "columns": ["Electric Vehicle Type"], "statement": "`Electric Vehicle Type` has 2 distinct values; the most common is 'Battery Electric Vehicle (BEV)' with 241,724 rows (80.65% of non-missing). The second most common is 'Plug-in Hybrid Electric Vehicle (PHEV)' (57,981 rows, 19.35%)."}
+{"id": "F23", "category": "categorical", "columns": ["Clean Alternative Fuel Vehicle (CAFV) Eligibility"], "statement": "`Clean Alternative Fuel Vehicle (CAFV) Eligibility` has 3 distinct values; the most common is 'Eligibility unknown as battery range has not been researched' with 196,235 rows (65.48% of non-missing). The second most common is 'Clean Alternative Fuel Vehicle Eligible' (79,293 rows, 26.46%)."}
+{"id": "F24", "category": "categorical", "columns": ["Electric Utility"], "statement": "`Electric Utility` has 77 distinct values; the most common is 'PUGET SOUND ENERGY INC||CITY OF TACOMA - (WA)' with 103,988 rows (34.7% of non-missing). The second most common is 'PUGET SOUND ENERGY INC' (63,791 rows, 21.29%)."}
+{"id": "F25", "category": "relationship", "columns": ["Electric Range", "Clean Alternative Fuel Vehicle (CAFV) Eligibility"], "statement": "`Clean Alternative Fuel Vehicle (CAFV) Eligibility` is the categorical column most associated with `Electric Range` (eta squared = 0.5724, estimated on a 50,000-row sample): 'Eligibility unknown as battery range has not been researched': median 0, mean 0, n = 196,235; 'Clean Alternative Fuel Vehicle Eligible': median 84, mean 132.29, n = 79,267; 'Not eligible due to low battery range': median 21, mean 20.72, n = 24,177. Zero share by group: 'Eligibility unknown as battery range has not been researched' 100.0%; 'Clean Alternative Fuel Vehicle Eligible' 0.0%; 'Not eligible due to low battery range' 0.0%."}
+{"id": "F26", "category": "temporal", "columns": ["Model Year"], "statement": "Rows span 23 periods of Model Year from 1999 to 2027; the busiest period is 2023 with 61,595 rows."}
+{"id": "F27", "category": "temporal", "columns": ["Electric Range", "Model Year"], "statement": "Mean `Electric Range` is 74 in 1999 and 0.4829 in 2027."}
+{"id": "F28", "category": "temporal", "columns": ["Model Year"], "statement": "`Model Year` runs from 1999 to 2027; the most common value is 2023 (61,595 rows, 20.55%)."}
+{"id": "F29", "category": "limitation", "columns": [], "statement": "The CSV does not document what each column means or its units; this analysis describes structure only and does not interpret undocumented codes or abbreviations."}
+{"id": "F30", "category": "limitation", "columns": [], "statement": "Relationships reported here are associations; they do not establish causation."}
+{"id": "F31", "category": "limitation", "columns": [], "statement": "The data do not reveal why values are missing, so missing values may not be random and could bias summaries of the affected columns."}
+{"id": "F32", "category": "limitation", "columns": ["Electric Range"], "statement": "Large shares of exact zeros may represent unrecorded values; if so, means and medians are biased downward."}
+{"id": "F33", "category": "limitation", "columns": [], "statement": "The sensitive-data check is a name/pattern heuristic; the absence of a warning does not mean the data are free of personal information."}
+
+TASK: Write between 5 and 8 concise, evidence-based insights (1-2 sentences each).
+Together they MUST include at least one insight of each of these categories: data_quality, distribution, categorical, relationship, limitation, follow_up_question.
+- data_quality: a data-quality finding
+- distribution: a finding about the distribution of a numeric column
+- categorical: a finding about a categorical column
+- relationship: a relationship between variables (association only)
+- limitation: a limitation or potential bias of this data or analysis
+- follow_up_question: one question worth investigating further (phrase it as a question)
+Each quantitative insight must name the relevant column and quote a count, percentage or statistic from the facts.
+Also write a 2-3 sentence "summary" of the dataset using only the facts.
+
+Return JSON exactly in this shape:
+{"summary": "...", "insights": [{"category": "data_quality", "text": "...", "fact_ids": ["F02"]}]}

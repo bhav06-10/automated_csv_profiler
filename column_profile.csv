@@ -1,0 +1,17 @@
+column,technical_type,role,non_missing,missing,missing_pct,n_unique,unique_ratio,role_reason,notes
+VIN (1-10),string,identifier-like field,299705,0,0.0,18376,0.0613,"name suggests an ID/code and it has 18,376 distinct values",
+County,string,categorical attribute,299694,11,0.0,255,0.0009,text with 255 distinct values repeated across rows,
+City,string,categorical attribute,299694,11,0.0,941,0.0031,text with 941 distinct values repeated across rows,
+State,string,categorical attribute,299705,0,0.0,50,0.0002,text with 50 distinct values repeated across rows,
+Postal Code,integer,identifier-like field,299694,11,0.0,1201,0.004,"numbers in a column whose name suggests a code or ID (['code', 'postal']); arithmetic on codes is not meaningful",
+Model Year,year (integer),date-like field,299705,0,0.0,23,0.0001,integer values between 1800 and 2200 in a column whose name contains a year word,
+Make,string,categorical attribute,299705,0,0.0,51,0.0002,text with 51 distinct values repeated across rows,
+Model,string,categorical attribute,299705,0,0.0,202,0.0007,text with 202 distinct values repeated across rows,
+Electric Vehicle Type,string,categorical attribute,299705,0,0.0,2,0.0,text with 2 distinct values repeated across rows,
+Clean Alternative Fuel Vehicle (CAFV) Eligibility,string,categorical attribute,299705,0,0.0,3,0.0,text with 3 distinct values repeated across rows,
+Electric Range,integer,numeric measure,299679,26,0.01,117,0.0004,100.0% of non-missing values are numbers,
+Legislative District,integer,identifier-like field,298915,790,0.26,49,0.0002,numbers in a column whose name suggests a code or ID (['district']); arithmetic on codes is not meaningful,
+DOL Vehicle ID,integer,identifier-like field,299705,0,0.0,299705,1.0,numbers in a column whose name suggests a code or ID (['id']); arithmetic on codes is not meaningful,
+Vehicle Location,coordinate text (geometry),unknown or mixed type,299685,20,0.01,1199,0.004,values look like map coordinates; spatial analysis is outside this tool's scope,
+Electric Utility,string,categorical attribute,299694,11,0.0,77,0.0003,text with 77 distinct values repeated across rows,75% of sampled values contain '|' or ';' - the field may hold several values per row
+2020 GEOID,integer,identifier-like field,299694,11,0.0,2466,0.0082,numbers in a column whose name suggests a code or ID (['geoid']); arithmetic on codes is not meaningful,
