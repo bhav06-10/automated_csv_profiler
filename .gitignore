@@ -1,0 +1,9 @@
+# raw data is downloaded separately (see data/README.md); files are too large for GitHub
+data/*.csv
+# generated test files
+src/tests/edge_cases/
+__pycache__/
+*.pyc
+.venv/
+.env
+.ipynb_checkpoints/
